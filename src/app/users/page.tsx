@@ -5,6 +5,11 @@ async function getUsers() {
     // 遅延をシミュレート（2秒）
     await new Promise(resolve => setTimeout(resolve, 2000))
 
+    // エラーをシミュレート（50%の確率で）
+    if (Math.random() > 0.5) {
+        throw new Error('ユーザーデータの取得に失敗しました')
+    }
+
     // 実際のAPIコール例
     // const res = await fetch('http://localhost:3000/api/users')
     // return res.json()

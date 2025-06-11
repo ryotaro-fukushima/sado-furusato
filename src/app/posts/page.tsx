@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import PostList from './components/PostList'
-import PostSkeleton from './components/PostSkeleton'
 
 export default function PostsPage() {
     return (
@@ -15,15 +14,9 @@ export default function PostsPage() {
                 </p>
             </div>
 
-            {/* 手動でSuspenseを使用 */}
             <div className="space-y-8">
-                <Suspense fallback={<PostSkeleton />}>
-                    <PostList category="技術" delay={1000} />
-                </Suspense>
-
-                <Suspense fallback={<PostSkeleton />}>
-                    <PostList category="日常" delay={2000} />
-                </Suspense>
+                <PostList category="技術" delay={1000} />
+                <PostList category="日常" delay={2000} />
             </div>
         </div>
     )

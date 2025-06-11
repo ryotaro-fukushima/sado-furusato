@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import PostSkeleton from './PostSkeleton'
 
 interface Post {
     id: number
@@ -10,6 +11,11 @@ interface Post {
 async function getPosts(category: string, delay: number): Promise<Post[]> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, delay))
+    
+    // エラーをシミュレート（技術カテゴリーの場合）
+    if (category === '技術') {
+        throw new Error('技術カテゴリーのデータ取得に失敗しました')
+    }
     
     // Mock data
     return [
@@ -33,7 +39,15 @@ interface PostListProps {
     delay: number
 }
 
-export default async function PostList({ category, delay }: PostListProps) {
+export default function PostList({ category, delay }: PostListProps) {
+    return (
+        <Suspense fallback={<PostSkeleton />}>
+            <PostListContent category={category} delay={delay} />
+        </Suspense>
+    )
+}
+
+async function PostListContent({ category, delay }: PostListProps) {
     const posts = await getPosts(category, delay)
 
     return (
