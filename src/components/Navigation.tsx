@@ -22,6 +22,12 @@ export default function Navigation() {
                         >
                             投稿
                         </Link>
+                        <Link
+                            href="/use-effect-demo"
+                            className="text-gray-600 hover:text-gray-900 transition-colors"
+                        >
+                            useEffectデモ
+                        </Link>
                     </div>
                 </div>
             </div>
